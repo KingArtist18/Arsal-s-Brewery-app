@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import { ThemeProvider, CssBaseline } from "@mui/material";
+import { ThemeProvider, CssBaseline, AppBar, Toolbar, Button } from "@mui/material";
 import theme from "./theme";
 import Layout from "./Layout";
 
@@ -20,29 +20,31 @@ function App() {
       <CssBaseline />
       <Router>
         {/* Navigation Bar */}
-        <nav style={{ padding: "1rem", background: "#1976d2" }}>
-          <Link to="/" style={{ marginRight: "1rem", color: "white" }}>
-            Task 1: Update Product
-          </Link>
-          <Link to="/add" style={{ marginRight: "1rem", color: "white" }}>
-            Task 2: Add Product
-          </Link>
-          <Link to="/tax" style={{ marginRight: "1rem", color: "white" }}>
-            Task 3: Tax Calculator
-          </Link>
-          <Link to="/basket" style={{ marginRight: "1rem", color: "white" }}>
-            Task 4: Basket Status
-          </Link>
-          <Link to="/item" style={{ marginRight: "1rem", color: "white" }}>
-            Task 5: Add Item
-          </Link>
-          <Link to="/sale" style={{ marginRight: "1rem", color: "white" }}>
-            Task 6: Sale Status
-          </Link>
-          <Link to="/report" style={{ color: "white" }}>
-            Task 7: Reports Menu
-          </Link>
-        </nav>
+        <AppBar position="static">
+          <Toolbar>
+            <Button color="inherit" component={Link} to="/">
+              Task 1: Update Product
+            </Button>
+            <Button color="inherit" component={Link} to="/add">
+              Task 2: Add Product
+            </Button>
+            <Button color="inherit" component={Link} to="/tax">
+              Task 3: Tax Calculator
+            </Button>
+            <Button color="inherit" component={Link} to="/basket">
+              Task 4: Basket Status
+            </Button>
+            <Button color="inherit" component={Link} to="/item">
+              Task 5: Add Item
+            </Button>
+            <Button color="inherit" component={Link} to="/sale">
+              Task 6: Sale Status
+            </Button>
+            <Button color="inherit" component={Link} to="/report">
+              Task 7: Reports Menu
+            </Button>
+          </Toolbar>
+        </AppBar>
 
         {/* Routes */}
         <Routes>

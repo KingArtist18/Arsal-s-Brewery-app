@@ -6,17 +6,17 @@ const app = express();
 app.use(express.json());
 app.use(cors()); // allow frontend to connect
 
-// POST /api/updateDescription
-app.post("/api/updateDescription", async (req, res) => {
+// PUT /api/products/update-description
+app.put("/api/products/update-description", async (req, res) => {
   const { productId, newDescription } = req.body;
 
   let connection;
   try {
     connection = await oracledb.getConnection({
-    user: "COMP214_F25_ers_65",
-    password: "password",
-    connectionString: "199.212.26.208:1521/SQLD"   // use SID here
-});
+      user: "COMP214_F25_ers_65",
+      password: "password",
+      connectionString: "199.212.26.208:1521/SQLD" // use SID here
+    });
 
     const result = await connection.execute(
       `UPDATE bb_product SET description = :desc WHERE idproduct = :id`,
@@ -28,7 +28,7 @@ app.post("/api/updateDescription", async (req, res) => {
       return res.status(404).json({ status: "error", message: "Product not found." });
     }
 
-    res.json({ status: "success", rowsAffected: result.rowsAffected });
+    res.json({ status: "success", message: `Product ${productId} updated successfully` });
   } catch (err) {
     console.error("Oracle error:", err);
     res.status(500).json({ status: "error", message: err.message });

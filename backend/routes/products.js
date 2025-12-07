@@ -1,8 +1,8 @@
- const express = require('express');
+const express = require('express');
 const router = express.Router();
 const db = require('../db');
 
-// ✅ Function ck_Product_SF
+// ✅ Function ck_Product_SF (fetch product info)
 router.get('/:id', async (req, res) => {
   const productId = req.params.id;
   try {
@@ -19,14 +19,14 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// ✅ Procedure ck_Product_SP
-router.post('/:id/update', async (req, res) => {
-  const productId = req.params.id;
+// ✅ Procedure ck_Product_SP (update product description)
+router.put('/update-product', async (req, res) => {
+  const { productId, newDescription } = req.body;
   try {
     const conn = await db.getConnection();
     await conn.execute(
-      `BEGIN ck_Product_SP(:id); END;`,
-      { id: productId }
+      `BEGIN ck_Product_SP(:id, :desc); END;`,
+      { id: productId, desc: newDescription }
     );
     res.json({ message: `Product ${productId} updated successfully` });
     await conn.close();
